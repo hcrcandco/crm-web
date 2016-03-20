@@ -1,0 +1,17 @@
+{
+  "name": "crm-web",
+  "description": "Web app for the CRM system.",
+  "main": "index.js",
+  "authors": [],
+  "license": "ISC",
+  "homepage": "https://github.com/hcrcandco/crm-web",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
