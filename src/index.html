@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" content="Feedback form for HCRC & Co." />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>CRM Web - HCRC & Co.</title>
+        <link rel="icon" href="favicon.ico" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700">
+        <!-- build:css -->
+        <!-- bower:css -->
+        <link rel="stylesheet" href="../bower_components/angular-material/angular-material.css" />
+        <!-- endbower -->
+        <link rel="stylesheet" href="app.css" />
+        <!-- endbuild -->
+    </head>
+    <body ng-app="crm-web">
+
+        <div layout="column" layout-fill>
+
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <img src="assets/logo.png" alt="Logo" style="height: 80%;">
+                    <span flex></span>
+                    <span>HCRC & Co. Feedback Form</span>
+                </div>
+            </md-toolbar>
+
+            <md-content layout="column" flex ng-controller="MainCtrl" style="background-color: #eee;">
+
+                <div layout="row" layout-padding layout-align="center start">
+                    <md-card>
+
+                        <md-card-header>
+                            <md-card-header-text>
+                                <span class="md-title">Survey</span>
+                                <span class="md-subhead">Help us serve you better by taking this short survey</span>
+                            </md-card-header-text>
+                        </md-card-header>
+
+                        <!-- Card content -->
+                        <md-card-content>
+
+                            <!-- Form -->
+                            <form name="feedbackForm" id="feedback-form">
+
+                                <!-- Phone -->
+                                <md-input-container class="md-block">
+                                    <label>Phone</label>
+                                    <input name="phone" ng-change="getCustomer()" ng-model="customer.phone" required ng-pattern="/^[7-9]{1}[0-9]{9}$/" md-maxlength="10">
+                                    <div ng-messages="feedbackForm.phone.$error" role="alert">
+                                        <div ng-message="required">Your phone number is required.</div>
+                                        <div ng-message="pattern">Please enter a valid phone number.</div>
+                                        <div ng-message="md-maxlength">Please enter a valid 10-digit phone number.</div>
+                                    </div>
+                                </md-input-container>
+
+                                <!-- First Name -->
+                                <md-input-container class="md-block">
+                                    <label>First Name</label>
+                                    <input type="text" name="firstName" ng-model="customer.firstName" ng-disabled="nascent">
+                                </md-input-container>
+
+                                <!-- Last Name -->
+                                <md-input-container class="md-block">
+                                    <label>Last Name</label>
+                                    <input type="text" name="lastName" ng-model="customer.lastName" ng-disabled="nascent">
+                                </md-input-container>
+
+                                <!-- Birthday -->
+                                <label>Birthday</label>
+                                <md-datepicker ng-model="customer.birthday" md-placeholder="Birthday" md-min-date="minDate" md-max-date="maxDate" required></md-datepicker>
+                                <div ng-messages="feedbackForm.birthday.$error" role="alert">
+                                    <span ng-message="required">Please enter your birthday.</span>
+                                </div>
+
+                                <!-- Satisfied -->
+                                <md-switch ng-model="feedback.isSatisfied" aria-label="Satisfied?">
+                                    <span ng-if="feedback.isSatisfied === true">Service was good</span>
+                                    <span ng-if="feedback.isSatisfied === false">Service was bad</span>
+                                </md-switch>
+
+                                <!-- Feedback -->
+                                <md-input-container class="md-block">
+                                    <label ng-if="feedback.isSatisfied">Suggestions?</label>
+                                    <label ng-if="!feedback.isSatisfied">What went wrong?</label>
+                                    <textarea name="message" ng-model="feedback.message" aria-label="Feedback"></textarea>
+                                </md-input-container>
+
+                            </form>
+                            <!-- End: Form -->
+
+                        </md-card-content>
+                        <!-- End: Card content -->
+
+                        <md-card-actions layout="row" layout-align="end center">
+                            <md-button type="submit" form="feedback-form" class="md-primary md-raised" ng-click="submitFeedback()" ng-disabled="feedbackForm.$invalid || nascent">Submit</md-button>
+                        </md-card-actions>
+
+                    </md-card>
+
+                </div>
+
+            </md-content>
+
+        </div>
+
+        <!-- build:js -->
+        <!-- bower:js -->
+        <script src="../bower_components/angular/angular.js"></script>
+        <script src="../bower_components/angular-animate/angular-animate.js"></script>
+        <script src="../bower_components/angular-aria/angular-aria.js"></script>
+        <script src="../bower_components/angular-messages/angular-messages.js"></script>
+        <script src="../bower_components/angular-material/angular-material.js"></script>
+        <!-- endbower -->
+        <script src="app.js"></script>
+        <!-- endbuild -->
+    </body>
+</html>
