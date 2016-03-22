@@ -4,7 +4,7 @@ angular.module('crm-web', ['ngMaterial', 'ngMessages']).controller('MainCtrl', [
 
         /* --- MODELS --- */
 
-        $scope.baseURL = 'http://localhost:1337/';
+        $scope.baseURL = 'http://api.hcrcandco.com/';
         $scope.customer = {};
         $scope.feedback = {};
         $scope.nascent = false;
