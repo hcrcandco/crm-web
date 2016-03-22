@@ -45,10 +45,21 @@ angular.module('crm-web', ['ngMaterial', 'ngMessages']).controller('MainCtrl', [
 
                         $mdToast.show($mdToast.simple().textContent('Hi ' + customer.firstName + '!').position('top right'));
 
+                        var tzOffset = (new Date()).getTimezoneOffset() * 60000;
+
                         $scope.customer = {
                             firstName: customer.firstName,
                             lastName: customer.lastName,
-                            birthday: new Date(customer.birthday),
+                            birthday: new Date(new Date(customer.birthday) - tzOffset),
+                            phone: $scope.customer.phone
+                        };
+
+                    } else {
+
+                        $scope.customer = {
+                            firstName: '',
+                            lastName: '',
+                            birthday: new Date(date.getFullYear() - 30, date.getMonth(), date.getDate()),
                             phone: $scope.customer.phone
                         };
 
